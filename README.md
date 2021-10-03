@@ -8,6 +8,9 @@
  Web scraping (https://www.nytimes.com/crosswords/game/mini) 
  The app employs algorithm to extract and process data from this website
  
+ # Execution
+  After the successfull execution of the Algorithm, a unique file will be created in the same folder as the App.
+ 
 # Built With (technologies used)
  Python
  lxml
@@ -41,6 +44,7 @@
 # A file manifest (a list of files in the directory or archive)
 
 # Copyright and licensing information
+ Please refer tothe licence file
 
 # Contact information for the distributor or author
 
