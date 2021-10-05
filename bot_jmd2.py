@@ -32,6 +32,8 @@ win.geometry("500x500")
 # Add a title to a displayed window
 win.title("BOT JMD 2") 
 
+win.iconbitmap("icon.ico")
+
 class Bot:
     def __init__(self, win, driver, browser_check):    
         self.browser_check = browser_check
@@ -110,31 +112,45 @@ class Bot:
             
     def display_data(self, title_elements, elements, Output, data, driver_url):
         for title_element in title_elements:
-            Output.insert(END, "> === " + title_element.text + " ===" + '\n') #print ACROSS and DOWN titles e.g "> === DOWN ==="   
+        
+            Output.insert(END, "> === " + title_element.text + " ===" + '\n') #print ACROSS and DOWN titles e.g "> === DOWN ===" 
+            
             i = 0 #iteration to retrieve the displayed numbers 
             items_holder = "" #used for rearranging the number and the corresponding string
             items_holder1 = ""
             li_number = 1
+            
             for element in elements: # each element includes a number and a string
+            
                 arr = element.text.split() #split the both the number and string into an array of words
+                
                 for x in arr:
                     if ( i == 0 ):
+                    
                         items_holder += "> " + x + ". " #assigning the initial string e.g "> 1."
                         index = x #get the json index as number
+                        
                     else:
                         items_holder += x + " " 
                         items_holder1 += x + " "
+                        
                     i += 1
+                    
                 if ( li_number < 6 and title_element.text == "ACROSS" ):
+                
                     Output.insert(END, items_holder + '\n') #print the list iterms under ACROSS
                     data["ACROSS"][index] = items_holder1.rstrip()  #add the item to CROSS list
+                    
                 elif ( li_number >= 6 and title_element.text == "DOWN" ):
+                
                     Output.insert(END, items_holder + '\n') # print the list iterms under DOWN
                     data["DOWN"][index] = items_holder1.rstrip()  #add the item to DOWN list
+                    
                 items_holder  = "" #empty the item holder to recreate next item
                 items_holder1 = ""
                 i = 0 #start again to retrieve next number as part of item
                 li_number += 1 #increment list of items by 1 to retrieve the next item e.g "> 1. Washington paper, with "the""
+                
         Output.pack()
         driver_url.quit()
         return data
